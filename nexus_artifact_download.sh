@@ -71,9 +71,9 @@ then
 fi
 
 # Define default values for optional components
-
+echo "VERSION: $VERSION"
 # If the version requested is a SNAPSHOT use snapshots, otherwise use releases
-if [[ "$VERSION" =~ ".*SNAPSHOT" ]]
+if echo $VERSION | grep -i snapshot
 then
     : ${REPO:="snapshots"}
 else
