@@ -5,7 +5,7 @@ SCRIPT_DIR=$(cd `dirname $0` && pwd)
 #
 # Source the env file
 #
-source $SCRIPT_DIR/.latest_sonatype_snapshot.env
+source $SCRIPT_DIR/.download_latest_artifact.env
 
 #
 # Usage
@@ -50,3 +50,5 @@ JAR_URL=$REPO_URL/$JAR_NAME
 
 # Download the jar
 curl -s -O $JAR_URL
+
+echo "Downloaded:  $JAR_NAME"
