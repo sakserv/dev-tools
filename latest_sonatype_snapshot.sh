@@ -42,4 +42,9 @@ REPO_URL=$REPO_URL/$(echo $groupId | sed 's|\.|\/|g')
 # Append the artifactId and version
 REPO_URL=$REPO_URL/$artifactId/$version
 
-echo $REPO_URL
+# Get the latest jar and append to the URL
+JAR_NAME=$(curl -s $REPO_URL/ | grep jar | sed -e 's|.*\"\>||g' -e 's|\<\/a\>\<\/td\>||g' | grep jar$ | grep -v -e javadoc -e sources | sort | tail -1)
+JAR_URL=$REPO_URL/$JAR_NAME
+
+# Download the jar
+curl -s -O $JAR_URL
