@@ -1,9 +1,11 @@
 #!/bin/bash
+SCRIPT_NAME=$(basename $0)
+SCRIPT_DIR=$(cd `dirname $0` && pwd)
 
 #
 # Source the env file
 #
-source ./.latest_sonatype_snapshot.env
+source $SCRIPT_DIR/.latest_sonatype_snapshot.env
 
 #
 # Usage
