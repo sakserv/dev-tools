@@ -3,9 +3,6 @@
   file: path={{ item.path }} state=directory mode={{ item.mode }}
   with_items:
           - { path: "{{ hadoop_install_dir }}", mode: '0755' }
-          - { path: "{{ cgroups_mount_dir }}", mode: '0755' }
-          - { path: "{{ cgroups_mount_dir }}/cpu", mode: '0755' }
-          - { path: "{{ cgroups_mount_dir }}/net_cls", mode: '0755' }
 
 - name: Copying templated files (provisioning scripts/config)
   template: src={{ item.src }} dest="{{ hadoop_install_dir}}/{{ item.dest }}" mode=0744
