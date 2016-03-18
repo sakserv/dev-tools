@@ -28,6 +28,7 @@ ssh-keygen -f /root/.ssh/ansible -N ''
 echo "#### Adding ssh key to authorized_keys"
 cat /root/.ssh/ansible.pub >> /root/.ssh/authorized_keys
 
-echo "#### Running the ansible hadoop provisioning"
+echo "#### Running the ansible hadoop provisioning playbook"
+ansible-playbook --private-key /root/.ssh/ansible -i /vagrant/ansible-hadoop/inventory /vagrant/ansible-hadoop/hadoop.yml
 
 exit 0
