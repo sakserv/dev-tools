@@ -21,3 +21,13 @@ cd /git && mvn clean install package -Pnative,dist -Dtar -Dcontainer-executor.co
 
 echo "#### Staging the hadoop archive"
 cp /git/hadoop-dist/target/hadoop-*.tar.gz /tmp/hadoop.tar.gz
+
+echo "#### Creating SSH key for ansible"
+ssh-keygen -f /root/.ssh/ansible -N ''
+
+echo "#### Adding ssh key to authorized_keys"
+cat /root/.ssh/ansible.pub >> /root/.ssh/authorized_keys
+
+echo "#### Running the ansible hadoop provisioning"
+
+exit 0
