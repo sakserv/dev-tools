@@ -22,6 +22,9 @@ yum groupinstall 'Development Tools' -y
 echo "#### Installing java8, git, maven, ansible, openssl, cmake, docker and protbuf"
 yum install java-1.8.0-openjdk-devel git maven ansible openssl-devel cmake protobuf-devel docker-engine -y
 
+echo "#### Starting docker"
+systemctl start docker.service
+
 echo "#### Configuring maven settings"
 mkdir -p /root/.m2/ 
 cp /vagrant/settings.xml /root/.m2/
