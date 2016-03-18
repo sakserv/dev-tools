@@ -5,9 +5,10 @@ Vagrant.configure(2) do |config|
 
   # Configuration memory and cpus
   config.vm.provider "virtualbox" do |v|
-#    v.customize ["setextradata" :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate", "1"]
+    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
     v.memory = 10240
     v.cpus = 4
+    v.name = "hadoop_build"
   end
 
   # CentOS 7 with VBox Additions
@@ -15,7 +16,7 @@ Vagrant.configure(2) do |config|
   config.vbguest.auto_update = true
 
   # Shared dirs
-  config.vm.synced_folder "/git/hadoop-hwx", "/git"
+  config.vm.synced_folder "/Users/skumpf/git/hadoop-hwx", "/git"
   config.vm.synced_folder ".", "/vagrant"
 
   # Run the bootstrap script

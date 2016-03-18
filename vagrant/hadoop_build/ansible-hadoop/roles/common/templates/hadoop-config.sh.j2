@@ -1,0 +1,24 @@
+set -e
+
+export JDK_DEVEL_PKG_VER=java-1.7.0-openjdk-devel-1.7.0.65-2.5.2.5.fc20
+#Ubuntu
+#export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/jre/
+#export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64/jre/
+#Centos-7
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64/jre/
+#export JAVA_HOME=/usr/lib/jvm/jre-1.7.0-openjdk.x86_64/
+#export JAVA_HOME=/usr/lib/jvm/jre-1.7.0-openjdk/
+export HADOOP_INSTALL_DIR={{ hadoop_install_dir }}
+export HADOOP_ARCHIVE=/tmp/hadoop.tar.gz
+export MR_SCRIPT=test-pi-yarn.sh
+
+#hadoop home is here irrespective of version
+export HADOOP_HOME=${HADOOP_INSTALL_DIR}/hadoop
+export CORE_DEFAULT=${HADOOP_HOME}/etc/hadoop/core-default.xml
+export CORE_SITE=${HADOOP_HOME}/etc/hadoop/core-site.xml
+export YARN_DEFAULT=${HADOOP_HOME}/etc/hadoop/yarn-default.xml
+export CONTAINER_EXECUTOR_CFG=${HADOOP_HOME}/etc/hadoop/container-executor.cfg
+export YARN_SITE=${HADOOP_HOME}/etc/hadoop/yarn-site.xml
+export MAPRED_SITE=${HADOOP_HOME}/etc/hadoop/mapred-site.xml
+export SLAVES=${HADOOP_HOME}/etc/hadoop/slaves
+export ENV_CONFIG=${HADOOP_HOME}/env.sh

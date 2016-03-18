@@ -16,13 +16,8 @@ echo "#### Configuring maven settings"
 mkdir -p /root/.m2/ 
 cp /vagrant/settings.xml /root/.m2/
 
-# Building on vbox shared folders is iffy at best
-# localize the code to the VM
-echo "#### Localizing /git"
-mkdir -p /git_local && cp -Rp /git/* /git_local/
-
-echo "#### Git branch"
-cd /git_local && git branch
-
 echo "#### Running the hadoop build"
-cd /git_local && mvn clean install package -Pnative,dist -Dtar -Dcontainer-executor.conf.dir=../etc/hadoop -DskipTests -Dmaven.javadoc.skip=true
+cd /git && mvn clean install package -Pnative,dist -Dtar -Dcontainer-executor.conf.dir=../etc/hadoop -DskipTests -Dmaven.javadoc.skip=true
+
+echo "#### Staging the hadoop archive"
+cp /git/hadoop-dist/target/hadoop-*.tar.gz /tmp/hadoop.tar.gz
