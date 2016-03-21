@@ -12,8 +12,8 @@ yum install epel-release -y
 echo "#### Installing development tooling"
 yum groupinstall 'Development Tools' -y
 
-echo "#### Installing java8, git, maven, ansible, openssl, cmake, and protbuf"
-yum install java-1.8.0-openjdk-devel git maven ansible openssl-devel cmake protobuf-devel -y
+echo "#### Installing java8, git, maven, ansible"
+yum install java-1.8.0-openjdk-devel git maven ansible -y
 
 echo "#### Adding JAVA_HOME to profile"
 # Determine JAVA_HOME

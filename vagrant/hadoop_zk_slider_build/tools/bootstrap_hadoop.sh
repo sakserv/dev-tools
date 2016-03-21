@@ -8,6 +8,12 @@ HADOOP_STG_DIR=/hadoop_staging
 ANSIBLE_HADOOP_STG_DIR=/ansible-hadoop_staging
 
 #
+# Installing required build deps
+#
+echo "#### Installing openssl, cmake, and protbuf"
+yum install openssl-devel cmake protobuf-devel -y
+
+#
 # Building Hadoop
 #
 echo "#### Staging code to $HADOOP_STG_DIR"
