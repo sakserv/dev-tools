@@ -23,7 +23,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 ALTERNATIVES_JAVA=$(readlink $WHICH_JAVA)
-JAVA_HOME=$(readlink $ALTERNATIVES_JAVA | sed 's|bin/java||g')
+JAVA_HOME=$(readlink $ALTERNATIVES_JAVA | sed 's|jre/bin/java||g')
 echo "export JAVA_HOME=$JAVA_HOME" >>/etc/profile
 
 #
