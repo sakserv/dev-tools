@@ -1,3 +1,0 @@
----
-- name: Provision slave 
-  shell: "{{ hadoop_install_dir }}/provision-slave.sh"
