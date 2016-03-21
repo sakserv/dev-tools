@@ -49,7 +49,7 @@ systemctl start docker.service
 #
 echo "#### Configuring maven settings"
 mkdir -p /root/.m2/
-cp /vagrant/settings.xml /root/.m2/
+cp /vagrant/files/settings.xml /root/.m2/
 
 #
 # Ansible setup
@@ -61,6 +61,6 @@ echo "#### Adding ssh key to authorized_keys"
 cat /root/.ssh/ansible.pub >> /root/.ssh/authorized_keys
 
 echo "#### Adding ansible.cfg to avoid host key checking"
-cp /vagrant/.ansible.cfg /root/
+cp /vagrant/files/.ansible.cfg /root/
 
 exit 0
