@@ -30,7 +30,7 @@ echo "#### Staging the hadoop archive"
 cp $HADOOP_STG_DIR/hadoop-dist/target/hadoop-*.tar.gz /tmp/hadoop.tar.gz
 
 #
-# Installing Hadoop
+# Installing and starting Hadoop
 #
 echo "#### Staging ansible-hadoop"
 if [ -d $ANSIBLE_HADOOP_STG_DIR ]; then

@@ -1,8 +1,15 @@
 #!/bin/bash
 
+#
+# Variables
+#
 HADOOP_SRC_DIR=/hadoop_src
 HADOOP_STG_DIR=/hadoop_staging
+ANSIBLE_HADOOP_STG_DIR=/ansible-hadoop_staging
 
+#
+# Building Hadoop
+#
 echo "#### Staging code to $HADOOP_STG_DIR"
 if [ -d $HADOOP_STG_DIR ]; then
   rm -rf $HADOOP_STG_DIR
@@ -16,13 +23,17 @@ cd $HADOOP_STG_DIR && mvn clean install package -Pnative,dist -Dtar -Dcontainer-
 echo "#### Staging the hadoop archive"
 cp $HADOOP_STG_DIR/hadoop-dist/target/hadoop-*.tar.gz /tmp/hadoop.tar.gz
 
-echo "#### Redownload the ansible playbook"
-cd /vagrant && git clone https://github.com/sakserv/ansible-hadoop.git
+
+#
+# Installing and starting Hadoop
+#
+echo "#### Staging ansible-hadoop"
+if [ -d $ANSIBLE_HADOOP_STG_DIR ]; then
+  rm -rf $ANSIBLE_HADOOP_STG_DIR
+fi
+git clone https://github.com/sakserv/ansible-hadoop.git $ANSIBLE_HADOOP_STG_DIR
 
 echo "#### Running the ansible hadoop provisioning playbook"
-ansible-playbook --private-key /root/.ssh/ansible -i /vagrant/ansible-hadoop/inventory /vagrant/ansible-hadoop/hadoop.yml
+ansible-playbook --private-key /root/.ssh/ansible -i $ANSIBLE_HADOOP_STG_DIR/inventory $ANSIBLE_HADOOP_STG_DIR/hadoop.yml
 
-echo "#### Cleaning up the staged ansible playbook"
-if [ -d /vagrant/ansible-hadoop ]; then
-  rm -rf /vagrant/ansible-hadoop
-fi
+exit 0
