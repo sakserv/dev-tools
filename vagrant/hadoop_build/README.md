@@ -41,7 +41,6 @@ Modify the Vagrantfile and change the source path for /hadoop_src (DO NOT change
 
 <code>
   # Shared dirs
-
   config.vm.synced_folder "/Users/skumpf/git/hadoop", "/hadoop_src"
 </code>
 
