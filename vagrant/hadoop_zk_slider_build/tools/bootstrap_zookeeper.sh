@@ -25,3 +25,20 @@ cp -Rp $ZK_SRC_DIR/* $ZK_STG_DIR
 
 echo "#### Running the hadoop build"
 cd $ZK_STG_DIR && ant clean tar
+
+echo "#### Staging the zookeeper archive"
+cp $ZK_STG_DIR/build/zookeeper-*.tar.gz /tmp/zookeeper.tar.gz
+
+#
+# Installing and starting Zookeeper
+#
+echo "#### Staging ansible-zookeeper"
+if [ -d $ANSIBLE_ZK_STG_DIR ]; then
+  rm -rf $ANSIBLE_ZK_STG_DIR
+fi
+git clone https://github.com/sakserv/ansible-zookeeper.git $ANSIBLE_ZK_STG_DIR
+
+echo "#### Running the ansible zookeeper provisioning playbook"
+ansible-playbook --private-key /root/.ssh/ansible -i $ANSIBLE_ZK_STG_DIR/inventory $ANSIBLE_ZK_STG_DIR/zookeeper.yml
+
+exit 0
