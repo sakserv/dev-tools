@@ -61,6 +61,11 @@ cp /vagrant/.ansible.cfg /root/
 echo "#### Running the ansible hadoop provisioning playbook"
 ansible-playbook --private-key /root/.ssh/ansible -i /vagrant/ansible-hadoop/inventory /vagrant/ansible-hadoop/hadoop.yml
 
+echo "#### Cleaning up the staged ansible playbook"
+if [ -d /vagrant/ansible-hadoop ]; then
+  rm -rf /vagrant/ansible-hadoop
+fi
+
 echo "#### Adding the hadoop binaries to PATH"
 echo "export PATH=$PATH:/usr/local/src/hadoop_install/hadoop/bin/" >>/etc/profile
 
