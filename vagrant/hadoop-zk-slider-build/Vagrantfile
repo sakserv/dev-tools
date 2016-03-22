@@ -35,4 +35,7 @@ Vagrant.configure(2) do |config|
 
   # Run the zookeeper bootstrap script
   config.vm.provision :shell, path: "tools/bootstrap_zookeeper.sh"
+
+  # Run the slider bootstrap script
+  config.vm.provision :shell, path: "tools/bootstrap_slider.sh"
 end
