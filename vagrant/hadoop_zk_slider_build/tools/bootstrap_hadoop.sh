@@ -41,10 +41,4 @@ git clone https://github.com/sakserv/ansible-hadoop.git $ANSIBLE_HADOOP_STG_DIR
 echo "#### Running the ansible hadoop provisioning playbook"
 ansible-playbook --private-key /root/.ssh/ansible -i $ANSIBLE_HADOOP_STG_DIR/inventory $ANSIBLE_HADOOP_STG_DIR/hadoop.yml
 
-#
-# Configuring environment
-#
-echo "#### Adding the hadoop binaries to PATH"
-echo "export PATH=$PATH:/usr/local/src/hadoop_install/hadoop/bin/" >>/etc/profile
-
 exit 0
