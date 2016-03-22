@@ -23,7 +23,7 @@ fi
 mkdir -p $ZK_STG_DIR
 cp -Rp $ZK_SRC_DIR/* $ZK_STG_DIR
 
-echo "#### Running the hadoop build"
+echo "#### Running the zookeeper build"
 cd $ZK_STG_DIR && ant clean tar
 
 echo "#### Staging the zookeeper archive"
