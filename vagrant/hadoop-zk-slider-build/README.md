@@ -59,7 +59,17 @@ After performing the setup above, simple start the virtual machine via Vagrant:
   vagrant up
 ```
 
+Once all provisioning completes, the VM can be accessed by running the following in the working directory:
+
+```
+  vagrant ssh
+```
+
 The projects will be installed to /usr/local/src/<project_name> by default.
+
+
+Deploying Code Changes
+----------------------
 
 After making code changes, to rebuild and redeploy, simple run the project specific bootstrap script. These scripts clean up the old installation and deploy any updated code changes.
 
@@ -82,3 +92,4 @@ After making code changes, to rebuild and redeploy, simple run the project speci
 TODO
 ----
 * Allow the source directories on the host machine to be defined with environment variables.
+
