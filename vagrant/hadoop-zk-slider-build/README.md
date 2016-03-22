@@ -61,7 +61,7 @@ After performing the setup above, simple start the virtual machine via Vagrant:
 
 The projects will be installed to /usr/local/src/<project_name> by default.
 
-After making code changes, to rebuild and redeploy, simple run the project specific bootstrap script. These scripts are idempotent, rerunning is safe:
+After making code changes, to rebuild and redeploy, simple run the project specific bootstrap script. These scripts clean up the old installation and deploy any updated code changes.
 
 * Hadoop
 ```
