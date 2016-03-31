@@ -35,13 +35,13 @@ echo -e "\n#### Extracting the go release to $GOINSTPATH"
 tar -C $GOINSTPATH -xzf $GOTARBALLLOCAL || exit 1
 
 echo -e "\n#### Adding GOROOT to profile"
-echo "export GOROOT=$GOROOT >>/etc/profile"
+echo "export GOROOT=$GOROOT" >>/etc/profile
 
 echo -e "\n#### Adding GOPATH to profile"
-echo "export GOPATH=$GOPATH >>/etc/profile"
+echo "export GOPATH=$GOPATH" >>/etc/profile
 
 echo -e "\n#### Adding GOROOT/bin to PATH"
-echo "export PATH=$GOROOT/bin >>/etc/profile"
+echo "export PATH=$GOROOT/bin" >>/etc/profile
 
 echo -e "\n#### Sourcing the updated profile"
 . /etc/profile
