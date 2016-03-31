@@ -29,7 +29,7 @@ echo -e "\n#### Install wget"
 yum install wget -y
 
 echo -e "\n#### Downloading the go release"
-wget $GOTARBALL -O $GOTARBALLLOCAL || exit 1
+wget $GOTARBALLURL -O $GOTARBALLLOCAL || exit 1
 
 echo -e "\n#### Extracting the go release to $GOINSTPATH"
 tar -C $GOINSTPATH -xzf $GOTARBALLLOCAL || exit 1
