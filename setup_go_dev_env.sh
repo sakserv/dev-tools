@@ -25,6 +25,9 @@ fi
 #
 # Main
 #
+echo -e "\n#### Install wget"
+yum install wget -y
+
 echo -e "\n#### Downloading the go release"
 wget $GOTARBALL -O $GOTARBALLLOCAL || exit 1
 
