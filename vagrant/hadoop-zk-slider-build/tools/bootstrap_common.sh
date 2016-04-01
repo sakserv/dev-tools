@@ -41,6 +41,13 @@ EOF
 
 echo "#### Installing docker"
 yum install docker -y
+
+echo "#### Configuring docker"
+cp /vagrant/files/docker /etc/sysconfig/docker
+
+echo "#### Configuring docker-storage"
+cp /vagrant/files/docker-storage /etc/sysconfig/docker-storage
+
 echo "#### Starting docker"
 systemctl start docker.service
 
