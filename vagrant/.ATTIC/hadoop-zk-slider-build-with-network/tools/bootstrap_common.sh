@@ -40,7 +40,7 @@ gpgkey=https://yum.dockerproject.org/gpg
 EOF
 
 echo "#### Installing docker"
-yum install docker-engine -y
+yum install docker -y
 
 echo "#### Configuring docker"
 cp /vagrant/files/docker /etc/sysconfig/docker
