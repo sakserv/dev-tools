@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+
+  # Configuration memory and cpus
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 10240
+    v.cpus = 4
+    v.name = "hadoop_build"
+  end
+
+  # CentOS 7 with VBox Additions
+  config.vm.box = "centos/7"
+  config.vbguest.auto_update = true
+
+  # Port forwarding for UIs
+  config.vm.network "forwarded_port", guest: 50070, host: 50070
+  config.vm.network "forwarded_port", guest: 8088, host: 8088
+  config.vm.network "forwarded_port", guest: 19888, host: 19888
+  config.vm.network "forwarded_port", guest: 50075, host: 50075
+  config.vm.network "forwarded_port", guest: 8042, host: 8042
+
+  # Shared dirs
+  config.vm.synced_folder "/Users/skumpf/git/hadoop-hwx", "/hadoop_src"
+  config.vm.synced_folder ".", "/vagrant"
+
+  # Run the common bootstrap script
+  config.vm.provision :shell, path: "tools/bootstrap_common.sh"
+
+  # Run the hadoop bootstrap script
+  config.vm.provision :shell, path: "tools/bootstrap_hadoop.sh"
+
+end
