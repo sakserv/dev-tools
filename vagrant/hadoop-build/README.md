@@ -45,7 +45,7 @@ config.vm.synced_folder "/Users/skumpf/git/hadoop-hwx", "/hadoop_src"
 
 Using
 -----
-After performing the setup above, simple start the virtual machine via Vagrant:
+After performing the setup above, simply start the virtual machine via Vagrant:
 
 ```
   vagrant up
@@ -63,7 +63,7 @@ The projects will be installed to /usr/local/src/<project_name> by default.
 Deploying Code Changes
 ----------------------
 
-After making code changes, to rebuild and redeploy, simple run the project specific bootstrap script. These scripts clean up the old installation and deploy any updated code changes.
+After making code changes, to rebuild and redeploy, simply run the project specific bootstrap script. These scripts clean up the old installation and deploy any updated code changes.
 
 * Hadoop
 ```
