@@ -16,7 +16,7 @@ Vagrant.configure(2) do |config|
 
   # Shared dirs
   config.vm.synced_folder ".", "/vagrant"
-  config.vm.synced_folder "/Users/skumpf/git/ycloud", "/ycloud"
+  config.vm.synced_folder "/Users/skumpf/git", "/git"
 
   # Run the common bootstrap script
   config.vm.provision :shell, path: "tools/bootstrap_common.sh"
