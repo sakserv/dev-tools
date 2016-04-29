@@ -44,6 +44,10 @@ echo -e "\n#### Adding GOROOT/bin to PATH"
 . /etc/profile
 echo "export PATH=$PATH:$GOROOT/bin" >>/etc/profile
 
+echo -e "\n#### Adding GOPATH/bin to PATH"
+. /etc/profile
+echo "export PATH=$PATH:$GOPATH/bin" >>/etc/profile
+
 echo -e "\n#### Sourcing the updated profile"
 . /etc/profile
 
