@@ -1,0 +1,40 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+
+  # Configuration memory and cpus
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 10240
+    v.cpus = 4
+    v.name = "docker-cloudbreak"
+  end
+
+  # CentOS 7 with VBox Additions
+  config.vm.box = "centos/7"
+  config.vbguest.auto_update = true
+
+  # Network
+  config.vm.network "public_network", type: "dhcp"
+
+  # Network
+  config.vm.provider "virtualbox" do |v|
+    v.customize ['modifyvm', :id, '--nictype2', 'virtio']
+    v.customize ['modifyvm', :id, '--nicpromisc2', 'allow-all']
+  end
+
+  # Port forwarding for UIs
+  #config.vm.network "forwarded_port", guest: 3000, host: 3000
+  #config.vm.network "forwarded_port", guest: 3001, host: 3001
+  #config.vm.network "forwarded_port", guest: 8500, host: 8500
+
+  # Shared dirs
+  config.vm.synced_folder ".", "/vagrant"
+  config.vm.synced_folder "/Users/skumpf/git", "/git"
+
+  # Run the common bootstrap script
+  config.vm.provision :shell, path: "tools/bootstrap_common.sh"
+
+  # Run the cloudbreak bootstrap script
+  config.vm.provision :shell, path: "tools/bootstrap_cloudbreak.sh"
+end
