@@ -29,13 +29,10 @@ gpgkey=https://yum.dockerproject.org/gpg
 EOF
 
 echo "#### Installing docker"
-yum install docker-engine -y
+yum install docker-engine-1.11.2-1.el7.centos -y
 
 echo "#### Configuring docker"
-mkdir -p /etc/docker
+mkdir -p /etc/docker/
 cp /vagrant/files/daemon.json /etc/docker/
-
-echo "#### Starting docker"
-systemctl start docker.service
 
 exit 0

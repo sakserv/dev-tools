@@ -43,10 +43,8 @@ echo "#### Installing docker"
 yum install docker-engine -y
 
 echo "#### Configuring docker"
-cp /vagrant/files/docker /etc/sysconfig/docker
-
-echo "#### Configuring docker-storage"
-cp /vagrant/files/docker-storage /etc/sysconfig/docker-storage
+mkdir -p /etc/docker
+cp /vagrant/files/daemon.json /etc/docker
 
 echo "#### Starting docker"
 systemctl start docker.service
