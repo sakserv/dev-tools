@@ -13,7 +13,7 @@ echo "#### Installing development tooling"
 yum groupinstall 'Development Tools' -y
 
 echo "#### Installing java8, git, maven, ansible"
-yum install java-1.8.0-openjdk-devel git maven ansible gcc-c++ cmake -y
+yum install java-1.8.0-openjdk-devel git maven ansible gcc-c++ cmake strace -y
 
 echo "#### Adding JAVA_HOME to profile"
 # Determine JAVA_HOME
