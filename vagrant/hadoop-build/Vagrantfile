@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 8042, host: 8042
 
   # Shared dirs
-  config.vm.synced_folder "/Users/skumpf/git/hadoop-YARN-5428", "/hadoop_src"
+  config.vm.synced_folder "/Users/skumpf/git/hadoop-YARN-5428-newbuild", "/hadoop_src"
   config.vm.synced_folder ".", "/vagrant"
 
   # Run the common bootstrap script
