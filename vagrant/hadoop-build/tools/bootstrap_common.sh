@@ -12,8 +12,8 @@ yum install epel-release -y
 echo "#### Installing development tooling"
 yum groupinstall 'Development Tools' -y
 
-echo "#### Installing java8, git, maven, ansible"
-yum install java-1.8.0-openjdk-devel git maven ansible gcc-c++ cmake strace -y
+echo "#### Installing java8, git, ansible, etc"
+yum install java-1.8.0-openjdk-devel git ansible gcc-c++ cmake strace wget -y
 
 echo "#### Adding JAVA_HOME to profile"
 # Determine JAVA_HOME
@@ -25,6 +25,21 @@ fi
 ALTERNATIVES_JAVA=$(readlink $WHICH_JAVA)
 JAVA_HOME=$(readlink $ALTERNATIVES_JAVA | sed 's|jre/bin/java||g')
 echo "export JAVA_HOME=$JAVA_HOME" >>/etc/profile
+
+#
+# Install Maven
+#
+echo -e "\n#### Installing Maven"
+cd /tmp
+wget -N http://apache.cs.utah.edu/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
+tar -xzvf apache-maven-3.5.0-bin.tar.gz -C /usr/local/bin
+export M2_HOME=/usr/local/bin/apache-maven-3.5.0/
+export M2=$M2_HOME/bin
+export JAVA_HOME=$JAVA_HOME
+export PATH=$PATH:$M2:$JAVA_HOME/bin
+echo "export PATH=$PATH:$M2:$JAVA_HOME/bin" >>/etc/profile
+. /etc/profile
+mvn --version
 
 #
 # Docker setup
