@@ -83,4 +83,7 @@ cat /root/.ssh/ansible.pub >> /root/.ssh/authorized_keys
 echo "#### Adding ansible.cfg to avoid host key checking"
 cp /vagrant/files/.ansible.cfg /root/
 
+echo "#### Run vi mode"
+echo "set -o vi" >> /root/.bashrc
+
 exit 0
