@@ -10,11 +10,18 @@ ANSIBLE_HADOOP_STG_DIR=/ansible-hadoop_staging
 #
 # Installing required build deps
 #
-echo "#### Installing openssl, cmake, and protbuf"
-yum install openssl-devel cmake protobuf-devel -y
+echo "#### Installing build deps"
+yum install openssl-devel cmake protobuf-devel nodejs -y
 
 #
-# Building Hadoop
+# Install and configure bower
+#
+echo "#### Installing and configuring bower"
+npm install -g bower
+echo '{ "allow_root": true }' > /root/.bowerrc
+
+#
+# Stage a clean hadoop repo for test-patch
 #
 echo "#### Staging code to $HADOOP_STG_DIR"
 if [ -d $HADOOP_STG_DIR ]; then
