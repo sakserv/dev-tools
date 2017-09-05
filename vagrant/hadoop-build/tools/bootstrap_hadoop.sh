@@ -10,8 +10,8 @@ ANSIBLE_HADOOP_STG_DIR=/ansible-hadoop_staging
 #
 # Installing required build deps
 #
-echo "#### Installing openssl, cmake, and protbuf"
-yum install openssl-devel cmake protobuf-devel -y
+echo "#### Installing openssl, cmake3, and protbuf"
+yum install openssl-devel cmake3 protobuf-devel -y
 
 #
 # Building Hadoop
