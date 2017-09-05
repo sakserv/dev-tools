@@ -15,6 +15,9 @@ yum groupinstall 'Development Tools' -y
 echo "#### Installing java8, git, ansible, etc"
 yum install java-1.8.0-openjdk-devel git ansible gcc-c++ cmake strace wget psmisc lsof -y
 
+echo "#### Removing cmake 2"
+yum remove cmake -y
+
 echo "#### Adding JAVA_HOME to profile"
 # Determine JAVA_HOME
 WHICH_JAVA=$(which java)
