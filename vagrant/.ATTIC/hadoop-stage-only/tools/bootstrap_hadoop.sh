@@ -10,14 +10,8 @@ ANSIBLE_HADOOP_STG_DIR=/ansible-hadoop_staging
 #
 # Installing required build deps
 #
-echo "#### Remving cmake 2"
-yum remove cmake -y
-
-echo "#### Installing openssl, cmake3, and protbuf"
-yum install openssl-devel cmake3 protobuf-devel -y
-
-echo "#### Add cmake symlink"
-ln -s /usr/bin/cmake3 /usr/bin/cmake
+echo "#### Installing openssl, cmake, and protbuf"
+yum install openssl-devel cmake protobuf-devel -y
 
 #
 # Building Hadoop
@@ -35,17 +29,5 @@ mvn clean install -Pnative,dist -Dtar -Dcontainer-executor.conf.dir=../etc/hadoo
 
 echo "#### Staging the hadoop archive"
 cp $HADOOP_STG_DIR/hadoop-dist/target/hadoop-*.tar.gz /tmp/hadoop.tar.gz
-
-#
-# Installing and starting Hadoop
-#
-echo "#### Staging ansible-hadoop"
-if [ -d $ANSIBLE_HADOOP_STG_DIR ]; then
-  rm -rf $ANSIBLE_HADOOP_STG_DIR
-fi
-git clone https://github.com/sakserv/ansible-hadoop.git $ANSIBLE_HADOOP_STG_DIR
-
-echo "#### Running the ansible hadoop provisioning playbook"
-ansible-playbook --private-key /root/.ssh/ansible -i $ANSIBLE_HADOOP_STG_DIR/inventory $ANSIBLE_HADOOP_STG_DIR/hadoop.yml
 
 exit 0

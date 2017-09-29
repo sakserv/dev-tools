@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <profiles>
+        <profile>
+            <id>thrift-maven</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>dtrott</id>
+                    <url>http://maven.davidtrott.com/repository</url>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>repo</id>
+                    <url>http://repo.maven.apache.org</url>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+        <profile>
+            <id>internal.repo</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>internal.repo</id>
+                    <url>http://nexus-private.hortonworks.com/nexus/content/repositories/public/</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+</settings>
