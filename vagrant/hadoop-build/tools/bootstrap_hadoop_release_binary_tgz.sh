@@ -12,11 +12,9 @@ RELEASE_TGZ="$1"
 #
 # Variables
 #
-HADOOP_SRC_DIR=/hadoop_src
-HADOOP_STG_DIR=/hadoop_staging
 ANSIBLE_HADOOP_STG_DIR=/ansible-hadoop_staging
 
-echo "#### Staging the hadoop archive"
+echo "#### Staging the hadoop binary archive"
 cp $RELEASE_TGZ /tmp/hadoop.tar.gz
 
 #
