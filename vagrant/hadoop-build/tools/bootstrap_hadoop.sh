@@ -6,6 +6,7 @@
 HADOOP_SRC_DIR=/hadoop_src
 HADOOP_STG_DIR=/hadoop_staging
 ANSIBLE_HADOOP_STG_DIR=/ansible-hadoop_staging
+MVN_BIN=/usr/local/bin/apache-maven-3.5.2/bin
 
 #
 # Installing required build deps
@@ -31,7 +32,7 @@ cp -Rp $HADOOP_SRC_DIR/* $HADOOP_STG_DIR
 
 echo "#### Running the hadoop build"
 cd $HADOOP_STG_DIR 
-mvn clean install -Pnative,dist -Dtar -Dcontainer-executor.conf.dir=../etc/hadoop -DskipTests -Dmaven.javadoc.skip=true || exit 1
+$MVN_BIN/mvn clean install -Pnative,dist -Dtar -Dcontainer-executor.conf.dir=../etc/hadoop -DskipTests -Dmaven.javadoc.skip=true || exit 1
 
 echo "#### Staging the hadoop archive"
 cp $HADOOP_STG_DIR/hadoop-dist/target/hadoop-*.tar.gz /tmp/hadoop.tar.gz
