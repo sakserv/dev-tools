@@ -49,4 +49,9 @@ git clone https://github.com/sakserv/ansible-hadoop.git $ANSIBLE_HADOOP_STG_DIR
 echo "#### Running the ansible hadoop provisioning playbook"
 ansible-playbook --private-key /root/.ssh/ansible -i $ANSIBLE_HADOOP_STG_DIR/inventory $ANSIBLE_HADOOP_STG_DIR/hadoop.yml
 
+echo "#### Restarting yarn"
+source /usr/local/src/hadoop_install/hadoop/env.sh
+/usr/local/src/hadoop_install/hadoop/restart-yarn.sh
+
+
 exit 0
