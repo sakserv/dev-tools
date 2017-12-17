@@ -13,8 +13,14 @@ FB_STAGE_DIR=/tmp/findbugs_staging
 #
 # Installing required build deps
 #
-echo "#### Installing build deps"
-yum install openssl-devel cmake protobuf-devel nodejs -y
+echo "#### Remving cmake 2"
+yum remove cmake -y
+
+echo "#### Installing openssl, cmake3, and protbuf"
+yum install openssl-devel cmake3 protobuf-devel nodejs -y
+
+echo "#### Add cmake symlink"
+ln -s /usr/bin/cmake3 /usr/bin/cmake
 
 #
 # Install and configure bower
