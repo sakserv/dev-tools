@@ -1,39 +1,60 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+require 'json'
 
-Vagrant.configure(2) do |config|
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
 
-  # Configuration memory and cpus
-  config.vm.provider "virtualbox" do |v|
-    v.memory = 10240
-    v.cpus = 4
-    v.name = "hadoop_build"
+# Profile search path:
+$profile_path = ["current.profile"]
+
+###############################################################################
+# Loads a profile, which is a JSON file describing a specific configuration.
+def loadProfile()
+  $profile_path.each { |file|
+    if file && File.file?(file)
+      puts "Loading profile %s\n" % [File.realpath(file)]
+      return JSON.parse( IO.read( file ), opts = { symbolize_names: true } )
+    end
+  }
+end
+
+profile = loadProfile()
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # All Vagrant configuration is done here. The most common configuration
+  # Every Vagrant virtual environment requires a box to build off of.
+  config.vm.box = profile[:box_name]
+
+  # Fixes changes from https://github.com/mitchellh/vagrant/pull/4707
+  config.ssh.insert_key = false
+
+  # The url from where the 'config.vm.box' box will be fetched if it
+  # doesn't already exist on the user's system.
+  if profile.key?(:box_url)
+    config.vm.box_url = profile[:box_url]
   end
 
-  # CentOS 7 with VBox Additions
-  config.vm.box = "centos/7"
-  config.vbguest.auto_update = true
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", profile[:vm_mem]] # RAM allocated to each VM
+    vb.customize ["modifyvm", :id, "--cpus", profile[:vm_cpus]] # CPU allocated to each VM
+    vb.customize ['modifyvm', :id, '--nicpromisc1', 'allow-all']
+  end
+  i = 0
+  profile[:nodes].each do |node|
+    config.vm.define node[:hostname] do |node_config|
+      hostname = node[:hostname] + "." + profile[:domain]
+      node_config.vm.hostname = hostname
+      node_config.vm.network :private_network, ip: node[:ip]
+      node_config.vm.synced_folder "/Users/skumpf/git/hadoop-YARN-2.8.2-rc1", "/hadoop_src"
+      node_config.vm.synced_folder "/Users/skumpf/git/patchbin", "/patchbin"
+      node_config.vm.synced_folder "~/.m2", "/root/.m2"
+      node_config.vm.synced_folder ".", "/vagrant"
 
-  # Port forwarding for UIs
-  config.vm.network "forwarded_port", guest: 50070, host: 50070
-  config.vm.network "forwarded_port", guest: 9870, host: 9870
-  config.vm.network "forwarded_port", guest: 8088, host: 8088
-  config.vm.network "forwarded_port", guest: 8188, host: 8188
-  config.vm.network "forwarded_port", guest: 19888, host: 19888
-  config.vm.network "forwarded_port", guest: 50075, host: 50075
-  config.vm.network "forwarded_port", guest: 9864, host: 9864
-  config.vm.network "forwarded_port", guest: 8042, host: 8042
-  config.vm.network "forwarded_port", guest: 9840, host: 9840
+      node_config.vm.provision :shell, path: "tools/bootstrap_common.sh"
+      node_config.vm.provision :shell, path: "tools/bootstrap_hadoop.sh"
 
-  # Shared dirs
-  config.vm.synced_folder "/Users/skumpf/git/hadoop-YARN-2.8.2-rc1", "/hadoop_src"
-  config.vm.synced_folder "/Users/skumpf/git/patchbin", "/patchbin"
-  config.vm.synced_folder ".", "/vagrant"
-
-  # Run the common bootstrap script
-  config.vm.provision :shell, path: "tools/bootstrap_common.sh"
-
-  # Run the hadoop bootstrap script
-  config.vm.provision :shell, path: "tools/bootstrap_hadoop.sh"
-
+      i += 1
+    end
+  end
 end
