@@ -86,4 +86,7 @@ cp /vagrant/files/.ansible.cfg /root/
 echo "#### Run vi mode"
 echo "set -o vi" >> /root/.bashrc
 
+echo "#### Setup /etc/hosts"
+echo '192.168.70.211	y7001.yns.hadoop.com	y7001' > /etc/hosts
+
 exit 0
