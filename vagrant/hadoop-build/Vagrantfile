@@ -47,11 +47,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       node_config.vm.hostname = hostname
       node_config.vm.network :private_network, ip: node[:ip]
       node_config.vm.synced_folder "/Users/skumpf/git/hadoop-YARN-7797.005", "/hadoop_src"
+      node_config.vm.synced_folder "/Users/skumpf/git/zookeeper", "/zookeeper_src"
       node_config.vm.synced_folder "/Users/skumpf/git/patchbin", "/patchbin"
       node_config.vm.synced_folder "~/.m2", "/root/.m2"
       node_config.vm.synced_folder ".", "/vagrant"
 
       node_config.vm.provision :shell, path: "tools/bootstrap_common.sh"
+      node_config.vm.provision :shell, path: "tools/bootstrap_zk.sh"
       node_config.vm.provision :shell, path: "tools/bootstrap_hadoop.sh"
 
       i += 1

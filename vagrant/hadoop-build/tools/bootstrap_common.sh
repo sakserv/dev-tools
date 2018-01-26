@@ -89,4 +89,8 @@ echo "set -o vi" >> /root/.bashrc
 echo "#### Setup /etc/hosts"
 echo '192.168.70.211	y7001.yns.hadoop.com	y7001' > /etc/hosts
 
+echo "#### Setup the resolver"
+echo "search yns.hadoop.com" > /etc/resolv.conf
+echo "nameserver 192.168.70.211" >> /etc/resolv.conf
+
 exit 0
